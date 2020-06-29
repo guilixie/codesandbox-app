@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+      }
+      .container {
+        width: 50%;
+      }
+      .item {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 20px;
+      }
+      .item .label {
+        font-size: 12px;
+        color: #888;
+        padding: 10px 0;
+      }
+      .item .box {
+        border: 1px solid;
+      }
+
+      .single-overflow {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .line-clamp-overflow {
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .position-overflow {
+        position: relative;
+        line-height: 24px;
+        height: 48px;
+        overflow: hidden;
+      }
+      .position-overflow::after {
+        position: absolute;
+        content: "...";
+        right: 0;
+        bottom: 0;
+        letter-spacing: 1px;
+        padding: 0 10px 0px 1px;
+        background: #fff;
+
+        /* word-break: break-all; */
+        /* 为了展示效果更好 */
+        /* background: -webkit-gradient(
+          linear,
+          left top,
+          right top,
+          from(rgba(255, 255, 255, 0)),
+          to(white),
+          color-stop(50%, white)
+        );
+        background: -moz-linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0),
+          white 50%,
+          white
+        );
+        background: -o-linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0),
+          white 50%,
+          white
+        );
+        background: -ms-linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0),
+          white 50%,
+          white
+        );
+        background: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0),
+          white 50%,
+          white
+        ); */
+      }
+
+      .float-overflow {
+        height: 48px;
+        line-height: 24px;
+        overflow: hidden;
+        /* background: lightblue; */
+      }
+      .float-overflow .text {
+        float: right;
+        margin-left: -5px;
+        width: 100%;
+        word-break: break-all;
+      }
+      .float-overflow::before {
+        float: left;
+        width: 5px;
+        content: "";
+        height: 48px;
+        /* background: red; */
+      }
+      .float-overflow::after {
+        float: right;
+        content: "...";
+        height: 24px;
+        line-height: 24px;
+        letter-spacing: 1px;
+        /* 为三个省略号的宽度 */
+        width: 1.5em;
+        /* 使盒子不占位置 */
+        margin-left: -1.5em;
+        /* 移动省略号位置 */
+        position: relative;
+        left: 100%;
+        top: -24px;
+        padding-right: 5px;
+        /* background: yellow; */
+        background: #fff;
+      }
+
+      .more-btn {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+        padding-top: 20px;
+        padding-bottom: 0px;
+      }
+
+      .mask-overflow {
+        position: relative;
+        line-height: 24px;
+        height: 72px;
+        overflow: hidden;
+        -webkit-mask-image: -webkit-gradient(
+          linear,
+          left bottom,
+          left top,
+          from(rgba(255, 255, 255, 0)),
+          color-stop(70%, #fff)
+        );
+        mask-image: linear-gradient(
+          -180deg,
+          #fff 0%,
+          rgba(255, 255, 255, 0) 70%
+        );
+      }
+
+      .fade-overflow {
+        position: relative;
+        line-height: 24px;
+        height: 72px;
+        overflow: hidden;
+      }
+      .fade-btn {
+        background-image: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          from(rgba(255, 255, 255, 0)),
+          color-stop(70%, #fff)
+        );
+        background-image: linear-gradient(
+          -180deg,
+          rgba(255, 255, 255, 0) 0%,
+          #fff 70%
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item">
+        <div class="label">单行文本截断</div>
+        <div class="box single-overflow">
+          啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+        </div>
+      </div>
+      <div class="item">
+        <div class="label">多行文本截断 -webkit-line-clamp实现</div>
+        <div class="box line-clamp-overflow">
+          啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+        </div>
+      </div>
+      <div class="item">
+        <div class="label">多行文本截断 定位元素实现多行文本截断</div>
+        <div class="box position-overflow">
+          啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+        </div>
+      </div>
+      <div class="item">
+        <div class="label">多行文本截断 float 特性实现多行文本截断</div>
+        <div class="box float-overflow">
+          <div class="text">
+            啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="label">多行文本截断 js实现</div>
+        <div class="box" id="j-text">
+          啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+        </div>
+      </div>
+      <div class="item">
+        <div class="label">多行文本截断 linear-gradient</div>
+        <div class="box fade-overflow">
+          啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+          <span class="more-btn fade-btn">查看更多</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="label">多行文本截断 mask</div>
+        <div class="box mask-overflow">
+          啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 兼容的获取当前样式的任意属性值
+      function getStyle(element) {
+        if (window.getComputedStyle) {
+          return window.getComputedStyle(element, null);
+        } else {
+          return element.currentStyle;
+        }
+      }
+      // js实现溢出文本截断, 或者插件推荐　https://github.com/josephschmitt/Clamp.js
+      // dom 文本容器
+      // line 保留几行
+      // text 文本
+      function textClamp(dom, clamp, text) {
+        if (!dom) return;
+        if (!clamp) clamp = 2;
+        // 文字大小
+        var fontSize = +getStyle(dom).fontSize.replace(/(.+)px/, "$1");
+        // 省略号长度
+        var ellipsisWidth = 1.5 * fontSize;
+        // 容器宽度
+        var width = dom.clientWidth;
+        // 显示字数
+        var total = ~~((width * clamp - ellipsisWidth) / fontSize);
+
+        if (total < text.length) {
+          text = text.slice(0, total) + "...";
+        }
+
+        dom.innerText = text;
+      }
+
+      window.onload = function() {
+        var dom = document.getElementById("j-text");
+        // 初始文本
+        var text = dom.innerText;
+
+        textClamp(dom, 2, text);
+
+        window.addEventListener("resize", function() {
+          textClamp(dom, 2, text);
+        });
+      };
+    </script>
+  </body>
+</html>
